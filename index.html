@@ -1,23 +1,17 @@
 <html>
  <head>
+    <title>Solluu</title>
+    <link rel="icon" href="logo.png">
   <script src="https://cdn.tailwindcss.com">
   </script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <style>
-   .toggle-checkbox:checked {
-    @apply right-0 border-blue-500;
-   }
-   .toggle-checkbox:checked + .toggle-label {
-    @apply bg-blue-500;
-   }
-   .toggle-checkbox:not(:checked) {
-    @apply left-0 border-pink-500;
-   }
-   .toggle-checkbox:not(:checked) + .toggle-label {
-    @apply bg-pink-500;
-   }
+
    body {
-    background: url('https://via.placeholder.com/1920x1080/ff69b4/ffffff?text=Pink+Background');
+    background: url('fbg1.png');
     background-size: cover;
    }
    .typing-indicator {
@@ -32,7 +26,7 @@
     background: #fff;
     border-radius: 50%;
     opacity: 0;
-    animation: typing 1.5s infinite;
+    animation: typing 1.0s infinite;
    }
    .typing-indicator span:nth-child(1) {
     animation-delay: 0s;
@@ -59,194 +53,171 @@
     scrollbar-width: none;
    }
    .message {
-    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+    background: linear-gradient(135deg, #e5b7d0 0%, #c45e8c 30%, #c01f72 100%);
     padding: 10px;
     border-radius: 15px;
     color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
    }
    .message.user {
-    background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+    background: linear-gradient(135deg, #88cef4 0%, #00076b 100%);
    }
   </style>
  </head>
  <body class="text-white h-screen flex flex-col">
-  <div class="flex items-center p-4 border-b border-gray-700">
-   <img alt="Profile picture" class="rounded-full w-10 h-10" id="profilePic" height="40" src="https://storage.googleapis.com/a1aa/image/bUk4mMR6fbWgNC1eZTOTOjbDysf1ML73jWpHWwChrLpJPhInA.jpg" width="40"/>
+  <div class="flex items-center p-0">
+   <img alt="Profile picture"  id="profilePic" src="icon.png"  style="margin-top: -25px; width:120px;">
    <div class="ml-4 flex-1">
-    <h1 class="text-lg font-semibold" id="username">
-     broken_tobi_13
-    </h1>
+    
    </div>
    <div class="flex space-x-4">
-    <div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
-     <input checked class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer transition-transform duration-200 ease-in-out transform translate-x-0" id="genderToggle" onclick="toggleGender()" type="checkbox"/>
-     <label class="toggle-label block overflow-hidden h-6 rounded-full bg-pink-500 cursor-pointer" for="genderToggle">
-     </label>
-    </div>
+    
    </div>
   </div>
-  <div class="flex flex-col items-center p-4">
-   <img alt="Profile picture" class="rounded-full w-20 h-20" id="profilePicLarge" height="80" src="https://storage.googleapis.com/a1aa/image/bUk4mMR6fbWgNC1eZTOTOjbDysf1ML73jWpHWwChrLpJPhInA.jpg" width="80"/>
-   <h2 class="text-xl font-semibold mt-2" id="usernameLarge">
-    broken_tobi_13
-   </h2>
-   <p class="text-gray-400">
-    Instagram
-   </p>
-   <button class="bg-gray-700 text-white px-4 py-2 rounded-full mt-2">
-    View Profile
-   </button>
-  </div>
+  <div class="flex flex-col items-center">
+    <div class="relative">
+        <img alt="Profile picture" class="rounded-full w-20 h-20" id="profilePicLarge" src="dp1.jpeg" style="top: 100px;"/>
+        <button id="onlineButton" class="absolute top-0 right-0 bg-green-500 rounded-full w-5 h-5 flex items-center justify-center">
+            <span class="text-white text-xs"><img src="online.png" alt=""></span>
+        </button>
+        
+    </div>
+    <h2 class="text-xl font-semibold mt-2" id="usernameLarge">
+        the_cutie_pie
+    </h2>
+    
+ </div>
+ 
   <div class="flex flex-col p-4 space-y-4 overflow-y-auto flex-1 no-scrollbar" id="chatContainer">
    <div class="text-center text-gray-400">
-    13 Aug, 2024, 7:42 AM
+ 
    </div>
-   <div class="flex items-start space-x-2">
-    <img alt="Profile picture" class="rounded-full w-10 h-10" height="40" src="https://storage.googleapis.com/a1aa/image/bUk4mMR6fbWgNC1eZTOTOjbDysf1ML73jWpHWwChrLpJPhInA.jpg" width="40"/>
     <div>
-     <p class="text-gray-400">
-      Reacted to @RKR's story
-     </p>
-     <div class="message">
-      <p>
-       Happy Birthday anna 🎉❤️✨
-      </p>
+ 
+     
+   
      </div>
     </div>
    </div>
-   <div class="flex justify-end">
-    <div class="message user max-w-xs">
-     <p>
-      thanks bro 🫂
-     </p>
-    </div>
+    
    </div>
-   <div class="text-center text-gray-400">
-    Fri 7:59 AM
+ 
+ 
    </div>
-   <div class="flex justify-end">
-    <div class="message user max-w-xs">
-     <p>
-      happy birthday bro❤️🫂
-     </p>
-    </div>
-   </div>
-   <div class="text-center text-gray-400">
-    Fri 8:17 AM
-   </div>
+  
    <div class="flex items-start space-x-2">
-    <img alt="Profile picture" class="rounded-full w-10 h-10" height="40" src="https://storage.googleapis.com/a1aa/image/bUk4mMR6fbWgNC1eZTOTOjbDysf1ML73jWpHWwChrLpJPhInA.jpg" width="40"/>
-    <div class="message">
-     <p>
-      Thanks anna 🫂❤️
-     </p>
+ 
+ 
     </div>
    </div>
   </div>
-  <div class="flex items-center p-4 border-t border-gray-700">
-   <input class="flex-1 bg-gray-800 text-white p-2 rounded-full" id="messageInput" placeholder="Message..." type="text"/>
+  <div class="flex items-center p-3 " style="margin-left: 10px;">
+   <input class="flex-1 p-2 rounded-full" id="messageInput" placeholder="Solluu..." type="text" style="color: #c01f72;">
    <div class="flex space-x-4 ml-4">
-    <i class="fas fa-camera text-xl">
-    </i>
-    <i class="fas fa-heart text-xl">
-    </i>
-    <i class="fas fa-microphone text-xl">
-    </i>
    </div>
   </div>
   <script>
-   function toggleGender() {
-    const checkbox = document.getElementById('genderToggle');
-    const body = document.body;
-    const username = document.getElementById('username');
-    const usernameLarge = document.getElementById('usernameLarge');
-    const profilePic = document.getElementById('profilePic');
-    const profilePicLarge = document.getElementById('profilePicLarge');
-    if (checkbox.checked) {
-     checkbox.classList.remove('bg-pink-500');
-     checkbox.classList.add('bg-blue-500');
-     checkbox.style.transform = 'translateX(100%)';
-     body.style.background = "url('https://via.placeholder.com/1920x1080/0000ff/ffffff?text=Blue+Background')";
-     body.style.backgroundSize = 'cover';
-     username.innerText = 'new_username';
-     usernameLarge.innerText = 'new_username';
-     profilePic.src = 'https://via.placeholder.com/40/0000ff/ffffff?text=New+Profile';
-     profilePicLarge.src = 'https://via.placeholder.com/80/0000ff/ffffff?text=New+Profile';
-    } else {
-     checkbox.classList.remove('bg-blue-500');
-     checkbox.classList.add('bg-pink-500');
-     checkbox.style.transform = 'translateX(0%)';
-     body.style.background = "url('https://via.placeholder.com/1920x1080/ff69b4/ffffff?text=Pink+Background')";
-     body.style.backgroundSize = 'cover';
-     username.innerText = 'broken_tobi_13';
-     usernameLarge.innerText = 'broken_tobi_13';
-     profilePic.src = 'https://storage.googleapis.com/a1aa/image/bUk4mMR6fbWgNC1eZTOTOjbDysf1ML73jWpHWwChrLpJPhInA.jpg';
-     profilePicLarge.src = 'https://storage.googleapis.com/a1aa/image/bUk4mMR6fbWgNC1eZTOTOjbDysf1ML73jWpHWwChrLpJPhInA.jpg';
-    }
-   }
+   let hasSaidGoodbye = false; // Flag to track if "appa vantaanga bye" has been sent
 
-   document.getElementById('messageInput').addEventListener('keypress', function (e) {
+document.getElementById('messageInput').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
-     const message = e.target.value;
-     const chatContainer = document.getElementById('chatContainer');
-     const profilePicSrc = document.getElementById('profilePic').src;
+        const message = e.target.value.trim(); // Trim whitespace
+        const chatContainer = document.getElementById('chatContainer');
+        const profilePicSrc = document.getElementById('profilePic').src;
 
-     // Append user's message
-     const userMessageDiv = document.createElement('div');
-     userMessageDiv.classList.add('flex', 'justify-end');
-     userMessageDiv.innerHTML = `<div class="message user max-w-xs"><p>${message}</p></div>`;
-     chatContainer.appendChild(userMessageDiv);
+        // Append user's message
+        const userMessageDiv = document.createElement('div');
+        userMessageDiv.classList.add('flex', 'justify-end');
+        userMessageDiv.innerHTML = `<div class="message user max-w-xs"><p>${message}</p></div>`;
+        chatContainer.appendChild(userMessageDiv);
 
-     // Scroll to the bottom
-     chatContainer.scrollTop = chatContainer.scrollHeight;
+        // Scroll to the bottom
+        chatContainer.scrollTop = chatContainer.scrollHeight;
 
-     // Check for specific messages and respond accordingly
-     let botReply = '';
-     if (message.toLowerCase() === 'hi') {
-      botReply = 'hello';
-     } else if (message.toLowerCase() === 'saptiya') {
-      botReply = 'mm sapten nee saptiya';
-     }
+        // Check for specific messages and respond accordingly
+        let botReply = '';
+        const lowerCaseMessage = message.toLowerCase(); // Convert message to lowercase for easier comparison
 
-     if (botReply) {
-      const typingDiv = document.createElement('div');
-      typingDiv.classList.add('flex', 'items-start', 'space-x-2');
-      typingDiv.innerHTML = `
-       <img alt="Profile picture" class="rounded-full w-10 h-10" height="40" src="${profilePicSrc}" width="40"/>
-       <div class="message max-w-xs">
-        <p>Typing</p>
-        <div class="typing-indicator">
-         <span></span>
-         <span></span>
-         <span></span>
-        </div>
-       </div>`;
-      chatContainer.appendChild(typingDiv);
+        // If the bot has already said goodbye, skip further replies
+        if (hasSaidGoodbye) {
+            return; // Exit the function if goodbye has been said
+        }
 
-      // Scroll to the bottom
-      chatContainer.scrollTop = chatContainer.scrollHeight;
+        // Adding responses for specific keywords
+        if (lowerCaseMessage === 'hi') {
+            botReply = 'Hello🙋🏻‍♀️';
+        } else if (lowerCaseMessage === 'bye') {
+            botReply = 'Byee👋';
+        } else if (lowerCaseMessage === 'okay') {
+            botReply = 'Ok😊';
+        } else if (lowerCaseMessage === 'name') {
+            botReply = 'en peru Rejina';
+        } else {
+            // Array of random responses, including the special response
+            const randomResponses = ["apparam solren", "seri", "oh", "okay", "appa vantaanga bye","Mmm", "appa vantaanga bye","Mmm", "appa vantaanga bye", ];
+            // Select a random response
+            botReply = randomResponses[Math.floor(Math.random() * randomResponses.length)];
 
-      setTimeout(() => {
-       chatContainer.removeChild(typingDiv);
-       const botMessageDiv = document.createElement('div');
-       botMessageDiv.classList.add('flex', 'items-start', 'space-x-2');
-       botMessageDiv.innerHTML = `
-        <img alt="Profile picture" class="rounded-full w-10 h-10" height="40" src="${profilePicSrc}" width="40"/>
-        <div class="message max-w-xs">
-         <p>${botReply}</p>
-        </div>`;
-       chatContainer.appendChild(botMessageDiv);
+            // If the random reply is "appa vantaanga bye", set the flag
+            if (botReply === "appa vantaanga bye") {
+                hasSaidGoodbye = true; // Set the flag to true
+                document.getElementById('onlineButton').style.display = 'none'; // Hide the online button
+            }
+        }
 
-       // Scroll to the bottom
-       chatContainer.scrollTop = chatContainer.scrollHeight;
-      }, 3000);
-     }
+        const typingDiv = document.createElement('div');
+        typingDiv.classList.add('flex', 'items-start', 'space-x-2');
+        typingDiv.innerHTML = `
+            <img alt="Profile picture" class="rounded-full w-10 h-10" height="40" src="dp1.jpeg" width="40"/>
+            <div class="message max-w-xs">
+                <p>Typing</p>
+                <div class="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>`;
+        chatContainer.appendChild(typingDiv);
 
-     // Clear the input
-     e.target.value = '';
+        // Scroll to the bottom
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+
+        setTimeout(() => {
+            chatContainer.removeChild(typingDiv);
+            const botMessageDiv = document.createElement('div');
+            botMessageDiv.classList.add('flex', 'items-start', 'space-x-2');
+            botMessageDiv.innerHTML = `
+                <img alt="Profile picture" class="rounded-full w-10 h-10" height="40" src="dp1.jpeg" width="40"/>
+                <div class="message max-w-xs">
+                    <p>${botReply}</p>
+                </div>`;
+            chatContainer.appendChild(botMessageDiv);
+
+            // Scroll to the bottom
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }, 3000);
+
+        // Clear the input
+        e.target.value = '';
     }
-   });
+});
+document.getElementById('messageInput').addEventListener('input', function (e) {
+    const maxLength = 45;
+    if (e.target.value.length > maxLength) {
+        alert(`Ivalo perusalaam type pannatha`);
+        e.target.value = e.target.value.substring(0, maxLength); // Trim the input to max length
+    }
+});
+document.getElementById('messageInput').addEventListener('input', function (e) {
+            const maxLength = 45;
+            const inputValue = e.target.value;
+
+            if (inputValue.length > maxLength) {
+                alert(`Input cannot exceed ${maxLength} characters.`);
+                e.target.value = inputValue.substring(0, maxLength); // Trim the input to max length
+            }
+        });
+
   </script>
  </body>
 </html>
