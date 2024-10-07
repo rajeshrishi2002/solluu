@@ -53,27 +53,37 @@
     scrollbar-width: none;
    }
    .message {
-    background: linear-gradient(135deg, #e5b7d0 0%, #c45e8c 30%, #c01f72 100%);
+    background: linear-gradient(135deg, #ffb1d3 0%, #fe69b3 50%,  #da0b76 80%, #d0015e 100%);
     padding: 10px;
     border-radius: 15px;
     color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
    }
    .message.user {
-    background: linear-gradient(135deg, #88cef4 0%, #00076b 100%);
+    background: linear-gradient(135deg, #88cef4 0%, #5ba2ff 50%, #00076b 100%);
    }
   </style>
  </head>
  <body class="text-white h-screen flex flex-col">
-  <div class="flex items-center p-0">
-   <img alt="Profile picture"  id="profilePic" src="icon.png"  style="margin-top: -25px; width:120px;">
-   <div class="ml-4 flex-1">
+    <div class="flex items-center p-0">
+        <img alt="Profile picture" id="profilePic" src="icon.png" style="margin-top: -25px; width:120px;">
+        <div class="ml-4 flex-1"></div>
+        <div class="flex space-x-4">
+            <i id="infoIcon" class="fas fa-info-circle text-white cursor-pointer" style="font-size: 24px; margin-bottom: 30px; margin-right: 10px;"></i>
+        </div>
+    </div>
     
-   </div>
-   <div class="flex space-x-4">
+    <!-- Popup Modal -->
+    <div id="infoModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+        <div class="bg-white text-black p-6 rounded-lg shadow-lg max-w-sm" style="    background: linear-gradient(135deg, #ffb1d3 0%, #ff5bad 50%,  #dd0085 80%, #d00169 100%)">
+            <img src="popup.png" style="size: 100px; min-width: 0px;"><center>
+            <h3 class="mt-4" style="color: #fff;">Created by:
+            <a href="https://www.instagram.com/rajesh_k_rishi/" style="color: #93ceff;"><b>Rajesh K Rishi</b></a></h3>
+            <button id="closeModal" class="mt-4 px-4 py-2 bg-gray-300 rounded" style="    background: linear-gradient(135deg, #91daff 0%, #5ba2ff 50%,  #006fdd 80%, #014593 100%);color: #fff;
+border-radius: 10px;">Okay ah</button></center>
+        </div>
+    </div>
     
-   </div>
-  </div>
   <div class="flex flex-col items-center">
     <div class="relative">
         <img alt="Profile picture" class="rounded-full w-20 h-20" id="profilePicLarge" src="dp1.jpeg" style="top: 100px;"/>
@@ -117,6 +127,16 @@
    </div>
   </div>
   <script>
+    document.getElementById('infoIcon').addEventListener('click', function () {
+    document.getElementById('infoModal').classList.remove('hidden'); // Show modal
+});
+
+document.getElementById('closeModal').addEventListener('click', function () {
+    document.getElementById('infoModal').classList.add('hidden'); // Hide modal
+});
+
+  </script>
+  <script>
    let hasSaidGoodbye = false; // Flag to track if "appa vantaanga bye" has been sent
 
 document.getElementById('messageInput').addEventListener('keypress', function (e) {
@@ -150,8 +170,8 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
             botReply = 'Byee👋';
         } else if (lowerCaseMessage === 'okay') {
             botReply = 'Ok😊';
-        } else if (lowerCaseMessage === 'name') {
-            botReply = 'en peru Rejina';
+        } else if (lowerCaseMessage === 'name'|| lowerCaseMessage ==='un per enna'|| lowerCaseMessage ==='un peru enna'|| lowerCaseMessage ==='name enna'|| lowerCaseMessage ==='name'|| lowerCaseMessage ==='Name'||lowerCaseMessage ==='name?'||lowerCaseMessage ==='Name?'||lowerCaseMessage ==='un name'||lowerCaseMessage ==='what is you name'||lowerCaseMessage ==='What is you name?'||lowerCaseMessage ==='whats you Name?'||lowerCaseMessage ==='your Name?'||lowerCaseMessage ==='Your Name'||lowerCaseMessage ==='Your Name?'||lowerCaseMessage ==='ur Name'||lowerCaseMessage ==='Ur Name'||lowerCaseMessage ==='un ame'||lowerCaseMessage ==='un name') {
+            botReply = 'en peru Rejinamotvani🥰';
         } else {
             // Array of random responses, including the special response
             const randomResponses = ["apparam solren", "seri", "oh", "okay", "appa vantaanga bye","Mmm", "appa vantaanga bye","Mmm", "appa vantaanga bye", ];
