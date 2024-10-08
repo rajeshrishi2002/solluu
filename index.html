@@ -71,7 +71,7 @@
 
     <div id="infoModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
         <div class="bg-white text-black p-6 rounded-lg shadow-lg max-w-sm" style="background: linear-gradient(135deg, #ffb1d3 0%, #ef598b 50%,  #c70156 80%, #900048 100%)">
-            <img src="popup.png" style="width: 280px;"><center>
+            <img src="" alt="update soon" style="width: 280px;"><center>
             <h3 class="mt-4" style="color: #fff;">Created by:
             <a href="https://www.instagram.com/rajesh_k_rishi/" style="color: #93ceff;"><b>Rajesh K Rishi</b></a></h3>
             <button id="closeModal" class="mt-4 px-4 py-2 bg-gray-300 rounded" style="background: linear-gradient(135deg, #91daff 0%, #5ba2ff 50%,  #006fdd 80%, #014593 100%);color: #fff;border-radius: 10px;">Okay ah</button>
@@ -158,8 +158,8 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
         // Respond to specific messages
         if (lowerCaseMessage === 'i love you') {
             loveYouCount++; // Increment the count for "I love you"
-            if (loveYouCount === 3) {
-                botReply = 'en appa oththuka maatrada, lets breakup';
+            if (loveYouCount === 2) {
+                botReply = 'en appa oththuka maataru, lets breakup💔';
                 isBreakupActive = true; // Stop further replies
                 // Show breakup popup after 2 seconds
                 setTimeout(() => {
@@ -190,7 +190,7 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
                 }
         else {
             // Array of random responses, including the special response
-            const randomResponses = ["apparam solren", "seri", "oh", "okay", "appa vantaanga bye","Mmm", "appa vantaanga bye","Mmm", "appa vantaanga bye", ];
+            const randomResponses = ["seri", "oh", "okay", "appa vantaanga bye","Mmm", "appa vantaanga bye","Mmm", "appa vantaanga bye", ];
             // Select a random response
             botReply = randomResponses[Math.floor(Math.random() * randomResponses.length)];
 
@@ -236,7 +236,7 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
 
             // Scroll to the bottom
             chatContainer.scrollTop = chatContainer.scrollHeight;
-        }, 10000);
+        }, 5000);
 
         // Clear the input
         e.target.value = '';
