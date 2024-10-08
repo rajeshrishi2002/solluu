@@ -1,70 +1,66 @@
 <html>
- <head>
+<head>
     <title>Solluu</title>
     <link rel="icon" href="logo.png">
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <style>
-
-   body {
-    background: url('fbg1.png');
-    background-size: cover;
-   }
-   .typing-indicator {
-    display: flex;
-    align-items: center;
-   }
-   .typing-indicator span {
-    display: block;
-    width: 8px;
-    height: 8px;
-    margin: 0 2px;
-    background: #fff;
-    border-radius: 50%;
-    opacity: 0;
-    animation: typing 1.0s infinite;
-   }
-   .typing-indicator span:nth-child(1) {
-    animation-delay: 0s;
-   }
-   .typing-indicator span:nth-child(2) {
-    animation-delay: 0.3s;
-   }
-   .typing-indicator span:nth-child(3) {
-    animation-delay: 0.6s;
-   }
-   @keyframes typing {
-    0%, 60%, 100% {
-     opacity: 0;
-    }
-    30% {
-     opacity: 1;
-    }
-   }
-   .no-scrollbar::-webkit-scrollbar {
-    display: none;
-   }
-   .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-   }
-   .message {
-    background: linear-gradient(135deg, #ffb1d3 0%, #fe69b3 50%, #a9004c 100%);
-    padding: 10px;
-    border-radius: 15px;
-    color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-   }
-   .message.user {
-    background: linear-gradient(135deg, #88cef4 0%, #5291e3 30%, #205293 80%, #010863 100%);
-   }
-  </style>
- </head>
- <body class="text-white h-screen flex flex-col">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background: url('fbg1.png');
+            background-size: cover;
+        }
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+        }
+        .typing-indicator span {
+            display: block;
+            width: 8px;
+            height: 8px;
+            margin: 0 2px;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0;
+            animation: typing 1.0s infinite;
+        }
+        .typing-indicator span:nth-child(1) { animation-delay: 0s; }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.3s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.6s; }
+        @keyframes typing {
+            0%, 60%, 100% { opacity: 0; }
+            30% { opacity: 1; }
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .message {
+            background: linear-gradient(135deg, #ffb1d3 0%, #fe69b3 50%, #a9004c 100%);
+            padding: 10px;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .message.user {
+            background: linear-gradient(135deg, #88cef4 0%, #5291e3 30%, #205293 80%, #010863 100%);
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            border-radius: 10px;
+            
+       
+        }
+        .popup img {
+            width: 600px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="text-white h-screen flex flex-col">
     <div class="flex items-center p-0">
         <img alt="Profile picture" id="profilePic" src="icon.png" style="margin-top: -25px; width:120px;">
         <div class="ml-4 flex-1"></div>
@@ -72,107 +68,127 @@
             <i id="infoIcon" class="fas fa-info-circle text-white cursor-pointer" style="font-size: 24px; margin-bottom: 30px; margin-right: 10px;"></i>
         </div>
     </div>
-    
-    <!-- Popup Modal -->
+
     <div id="infoModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-        <div class="bg-white text-black p-6 rounded-lg shadow-lg max-w-sm" style="    background: linear-gradient(135deg, #ffb1d3 0%, #ef598b 50%,  #c70156 80%, #900048 100%)">
+        <div class="bg-white text-black p-6 rounded-lg shadow-lg max-w-sm" style="background: linear-gradient(135deg, #ffb1d3 0%, #ef598b 50%,  #c70156 80%, #900048 100%)">
             <img src="popup.png" style="width: 280px;"><center>
             <h3 class="mt-4" style="color: #fff;">Created by:
             <a href="https://www.instagram.com/rajesh_k_rishi/" style="color: #93ceff;"><b>Rajesh K Rishi</b></a></h3>
-            <button id="closeModal" class="mt-4 px-4 py-2 bg-gray-300 rounded" style="    background: linear-gradient(135deg, #91daff 0%, #5ba2ff 50%,  #006fdd 80%, #014593 100%);color: #fff;
-border-radius: 10px;">Okay ah</button></center>
+            <button id="closeModal" class="mt-4 px-4 py-2 bg-gray-300 rounded" style="background: linear-gradient(135deg, #91daff 0%, #5ba2ff 50%,  #006fdd 80%, #014593 100%);color: #fff;border-radius: 10px;">Okay ah</button>
+        </div></center>
+    </div>
+
+    <div class="flex flex-col items-center">
+        <div class="relative">
+            <img alt="Profile picture" class="rounded-full w-20 h-20 -mt-10" id="profilePicLarge" src="dp1.jpeg" style="top: 100px;"/>
+            <button id="onlineButton" class="absolute top-0 right-0 bg-green-500 rounded-full w-5 h-5 flex items-center justify-center">
+                <span class="text-white text-xs"><img src="online.png" alt=""></span>
+            </button>
         </div>
+        <h2 class="text-xl font-semibold mt-2" id="usernameLarge" >the_cutie_pie</h2>
     </div>
-    
-  <div class="flex flex-col items-center">
-    <div class="relative">
-        <img alt="Profile picture" class="rounded-full w-20 h-20" id="profilePicLarge" src="dp1.jpeg" style="top: 100px;"/>
-        <button id="onlineButton" class="absolute top-0 right-0 bg-green-500 rounded-full w-5 h-5 flex items-center justify-center">
-            <span class="text-white text-xs"><img src="online.png" alt=""></span>
-        </button>
-        
-    </div>
-    <h2 class="text-xl font-semibold mt-2" id="usernameLarge">
-        the_cutie_pie
-    </h2>
-    
- </div>
- 
-  <div class="flex flex-col p-4 space-y-4 overflow-y-auto flex-1 no-scrollbar" id="chatContainer">
-   <div class="text-center text-gray-400">
- 
-   </div>
-    <div>
- 
-     
-   
-     </div>
-    </div>
-   </div>
-    
-   </div>
- 
- 
-   </div>
-  
-   <div class="flex items-start space-x-2">
- 
- 
-    </div>
-   </div>
-  </div>
-  <div class="flex items-center p-3 " style="margin-left: 10px;">
-   <input class="flex-1 p-2 rounded-full" id="messageInput" placeholder="Solluu..." type="text" style="color: #c01f72;">
-   <div class="flex space-x-4 ml-4">
-   </div>
-  </div>
-  <script>
-    document.getElementById('infoIcon').addEventListener('click', function () {
-    document.getElementById('infoModal').classList.remove('hidden'); // Show modal
-});
 
-document.getElementById('closeModal').addEventListener('click', function () {
-    document.getElementById('infoModal').classList.add('hidden'); // Hide modal
-});
+    <div class="flex flex-col p-4 space-y-4 overflow-y-auto flex-1 no-scrollbar" id="chatContainer"></div>
 
-  </script>
-  <script>
-   let hasSaidGoodbye = false; // Flag to track if "appa vantaanga bye" has been sent
+    <div class="flex items-center p-2">
+        <input class="flex-1 p-2 rounded-full" id="messageInput" placeholder="Solluu..." type="text" style="color: #c01f72;">
+    </div>
+
+    <div id="imagePopup" class="popup " >
+        <img src="sms.gif" alt="Image Response" style="width: 300px;">
+        <button id="closePopup" class="mt-2 px-4 py-2 " style="color: #c01f72;"></button>
+    </div>
+    <div id="breakupPopup" class="popup" style="display: none;">
+        <img src="blocked.gif" alt="Breakup Response" style="width: 300px;">
+        <button id="closeBreakupPopup" class="mt-2 px-4 py-2" style="color: #c01f72;"></button>
+    </div>
+    
+    <script>
+        document.getElementById('infoIcon').addEventListener('click', function () {
+        document.getElementById('infoModal').classList.remove('hidden'); // Show modal
+    });
+    
+    document.getElementById('closeModal').addEventListener('click', function () {
+        document.getElementById('infoModal').classList.add('hidden'); // Hide modal
+    });
+    
+      </script>
+<script>
+    let loveYouCount = 0; // Counter for "I love you" messages
+let isBreakupActive = false; // Flag to control bot replies
+let hasSaidGoodbye = false; // Flag to track if "appa vantaanga bye" has been sent
 
 document.getElementById('messageInput').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
-        const message = e.target.value.trim(); // Trim whitespace
+        const message = e.target.value.trim();
         const chatContainer = document.getElementById('chatContainer');
-        const profilePicSrc = document.getElementById('profilePic').src;
+
+
+        // Check if breakup is active, and stop further processing
+        if (isBreakupActive) {
+            e.target.value = ''; // Clear input
+            return; // Exit the function if breakup is active
+        }
+
 
         // Append user's message
         const userMessageDiv = document.createElement('div');
         userMessageDiv.classList.add('flex', 'justify-end');
         userMessageDiv.innerHTML = `<div class="message user max-w-xs"><p>${message}</p></div>`;
         chatContainer.appendChild(userMessageDiv);
-
-        // Scroll to the bottom
         chatContainer.scrollTop = chatContainer.scrollHeight;
 
-        // Check for specific messages and respond accordingly
         let botReply = '';
-        const lowerCaseMessage = message.toLowerCase(); // Convert message to lowercase for easier comparison
-
-        // If the bot has already said goodbye, skip further replies
+        const lowerCaseMessage = message.toLowerCase();
+          
         if (hasSaidGoodbye) {
-            return; // Exit the function if goodbye has been said
-        }
+    // Increment message count if goodbye has been said
+    messageCountAfterGoodbye++;
+    if (messageCountAfterGoodbye === 3) {
+        // Set a 7-second delay before showing the popups
+        setTimeout(() => {
+            document.getElementById('onlineButton').style.display = 'block'; // Show the image popup
+            document.getElementById('imagePopup').style.display = 'block'; // Show SMS popup
+        }, 10000); // 7000 milliseconds = 7 seconds
+    }
+    e.target.value = ''; // Clear input
+    return; // Exit the function
+}
 
-        // Adding responses for specific keywords
-        if (lowerCaseMessage === 'hi') {
+        // Respond to specific messages
+        if (lowerCaseMessage === 'i love you') {
+            loveYouCount++; // Increment the count for "I love you"
+            if (loveYouCount === 3) {
+                botReply = 'en appa oththuka maatrada, lets breakup';
+                isBreakupActive = true; // Stop further replies
+                // Show breakup popup after 2 seconds
+                setTimeout(() => {
+                    document.getElementById('breakupPopup').style.display = 'block'; // Show the breakup popup image
+                }, 5000);
+            } else {
+                botReply = 'love you too'; // Replace with your meme image URL
+            }
+        } else if (lowerCaseMessage === 'hi'|| lowerCaseMessage ==='Hi'|| lowerCaseMessage ==='hii'|| lowerCaseMessage ==='Hii'|| lowerCaseMessage ==='hey hi'|| lowerCaseMessage ==='Hey hi'|| lowerCaseMessage ==='hello'|| lowerCaseMessage ==='Hello'|| lowerCaseMessage ==='Hey hii'||lowerCaseMessage ==='hey hii'||lowerCaseMessage ==='Hi!'||lowerCaseMessage ==='hi!'||lowerCaseMessage ==='hi di'||lowerCaseMessage ==='Hi di'||lowerCaseMessage ==='hii di'||lowerCaseMessage ==='Hii di'||lowerCaseMessage ==='Hii!'||lowerCaseMessage ==='hii!'||lowerCaseMessage ==='hi pa'||lowerCaseMessage ==='Hi pa'||lowerCaseMessage ==='Hii pa'||lowerCaseMessage ==='hii pa' ||lowerCaseMessage ==='hi ma'||lowerCaseMessage ==='Hi ma'||lowerCaseMessage ==='Hii ma'||lowerCaseMessage ==='hii ma') {
             botReply = 'Hello🙋🏻‍♀️';
-        } else if (lowerCaseMessage === 'bye') {
+        } else if (lowerCaseMessage.match(/Byee|byee|Byee ma|bye|Bye|byee ma|bye di|Bye di|Byee di|byee di|Byee ma|Byee nga|bye nga|byee nga|Byee nga|bye👋🏻|Bye👋🏻|Byee👋🏻|byee👋🏻/i)) {
             botReply = 'Byee👋';
+            hasSaidGoodbye = true; // Set the flag to true
+            document.getElementById('onlineButton').style.display = 'none'; // Hide the online button
         } else if (lowerCaseMessage === 'okay') {
             botReply = 'Ok😊';
-        } else if (lowerCaseMessage === 'name'|| lowerCaseMessage ==='un per enna'|| lowerCaseMessage ==='un peru enna'|| lowerCaseMessage ==='name enna'|| lowerCaseMessage ==='name'|| lowerCaseMessage ==='Name'||lowerCaseMessage ==='name?'||lowerCaseMessage ==='Name?'||lowerCaseMessage ==='un name'||lowerCaseMessage ==='what is you name'||lowerCaseMessage ==='What is you name?'||lowerCaseMessage ==='whats you Name?'||lowerCaseMessage ==='your Name?'||lowerCaseMessage ==='Your Name'||lowerCaseMessage ==='Your Name?'||lowerCaseMessage ==='ur Name'||lowerCaseMessage ==='Ur Name'||lowerCaseMessage ==='un ame'||lowerCaseMessage ==='un name') {
+        }
+         else if (lowerCaseMessage.match(/saptiy|saptach/i)) {
+            botReply = 'Sapten,nee saptiya';
+        }
+        else if (lowerCaseMessage === 'name'|| lowerCaseMessage ==='un per enna'|| lowerCaseMessage ==='per enna'|| lowerCaseMessage ==='Per enna'|| lowerCaseMessage ==='Per Enna'|| lowerCaseMessage ==='un peru enna'|| lowerCaseMessage ==='name enna'|| lowerCaseMessage ==='name'|| lowerCaseMessage ==='Name'||lowerCaseMessage ==='name?'||lowerCaseMessage ==='Name?'||lowerCaseMessage ==='un name'||lowerCaseMessage ==='what is you name'||lowerCaseMessage ==='What is you name?'||lowerCaseMessage ==='whats you Name?'||lowerCaseMessage ==='your Name?'||lowerCaseMessage ==='Your Name'||lowerCaseMessage ==='Your Name?'||lowerCaseMessage ==='ur Name'||lowerCaseMessage ==='Ur Name'||lowerCaseMessage ==='un name'||lowerCaseMessage ==='un name') {
             botReply = 'en peru Rejinamotvani🥰';
-        } else {
+                }
+                else if (lowerCaseMessage === 'enna pandra'|| lowerCaseMessage ==='Enna pandra'|| lowerCaseMessage ==='enna pandra?'|| lowerCaseMessage ==='Enna pandra?'|| lowerCaseMessage ==='yenna pandra'|| lowerCaseMessage ==='Yenna pandra'|| lowerCaseMessage ==='What doing?'|| lowerCaseMessage ==='what doing?'|| lowerCaseMessage ==='enna pandringa'||lowerCaseMessage ==='Enna pandringa'||lowerCaseMessage ==='enna ma pandra'||lowerCaseMessage ==='Enna ma pandra'||lowerCaseMessage ==='enna pa pandra'||lowerCaseMessage ==='Enna pa pandra'||lowerCaseMessage ==='enna di pandra'||lowerCaseMessage ==='Enna di pandra'||lowerCaseMessage ==='enna pannitu iruka'||lowerCaseMessage ==='Enna pannitu iruka') {
+            botReply = 'unta thaan chat pandren😅';
+                }else if (lowerCaseMessage === 'saptiya'|| lowerCaseMessage ==='Saptiya'|| lowerCaseMessage ==='Saptacha'|| lowerCaseMessage ==='saptacha'|| lowerCaseMessage ==='saptingala'|| lowerCaseMessage ==='Saptingala'|| lowerCaseMessage ==='saptiya di'|| lowerCaseMessage ==='Saptiya di'|| lowerCaseMessage ==='ne saptiya'||lowerCaseMessage ==='Nee saptiya'||lowerCaseMessage ==='Ne saptiya'||lowerCaseMessage ==='saptiya?'||lowerCaseMessage ==='Saptiya?'||lowerCaseMessage ==='saptiya pa'||lowerCaseMessage ==='Saptiya pa'||lowerCaseMessage ==='enna saptacha'||lowerCaseMessage ==='Enna saptacha'||lowerCaseMessage ==='enna saptiya'||lowerCaseMessage ==='Enna saptiya'||lowerCaseMessage ==='Saptiya ma'||lowerCaseMessage ==='saptiya ma'||lowerCaseMessage ==='') {
+            botReply = 'Sapten,nee saptiya';
+                }
+        else {
             // Array of random responses, including the special response
             const randomResponses = ["apparam solren", "seri", "oh", "okay", "appa vantaanga bye","Mmm", "appa vantaanga bye","Mmm", "appa vantaanga bye", ];
             // Select a random response
@@ -182,6 +198,11 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
             if (botReply === "appa vantaanga bye") {
                 hasSaidGoodbye = true; // Set the flag to true
                 document.getElementById('onlineButton').style.display = 'none'; // Hide the online button
+                // Show the SMS popup immediately
+                setTimeout(() => {
+            document.getElementById('onlineButton').style.display = 'block'; // Show the image popup
+            document.getElementById('imagePopup').style.display = 'block'; // Show SMS popup
+        }, 10000);
             }
         }
 
@@ -215,12 +236,17 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
 
             // Scroll to the bottom
             chatContainer.scrollTop = chatContainer.scrollHeight;
-        }, 3000);
+        }, 5000);
 
         // Clear the input
         e.target.value = '';
     }
 });
+
+document.getElementById('closePopup').addEventListener('click', function () {
+            document.getElementById('imagePopup').style.display = 'none'; // Close the popup
+        });
+        
 document.getElementById('messageInput').addEventListener('input', function (e) {
     const maxLength = 45;
     if (e.target.value.length > maxLength) {
@@ -228,16 +254,11 @@ document.getElementById('messageInput').addEventListener('input', function (e) {
         e.target.value = e.target.value.substring(0, maxLength); // Trim the input to max length
     }
 });
-document.getElementById('messageInput').addEventListener('input', function (e) {
-            const maxLength = 45;
-            const inputValue = e.target.value;
 
-            if (inputValue.length > maxLength) {
-                alert(`Input cannot exceed ${maxLength} characters.`);
-                e.target.value = inputValue.substring(0, maxLength); // Trim the input to max length
-            }
-        });
 
-  </script>
- </body>
+
+</script>
+</body>
 </html>
+
+
