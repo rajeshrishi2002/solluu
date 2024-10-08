@@ -71,7 +71,7 @@
 
     <div id="infoModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
         <div class="bg-white text-black p-6 rounded-lg shadow-lg max-w-sm" style="background: linear-gradient(135deg, #ffb1d3 0%, #ef598b 50%,  #c70156 80%, #900048 100%)">
-            <img src="" alt="update soon" style="width: 280px;"><center>
+            <img src="popup.png" style="width: 280px;"><center>
             <h3 class="mt-4" style="color: #fff;">Created by:
             <a href="https://www.instagram.com/rajesh_k_rishi/" style="color: #93ceff;"><b>Rajesh K Rishi</b></a></h3>
             <button id="closeModal" class="mt-4 px-4 py-2 bg-gray-300 rounded" style="background: linear-gradient(135deg, #91daff 0%, #5ba2ff 50%,  #006fdd 80%, #014593 100%);color: #fff;border-radius: 10px;">Okay ah</button>
@@ -149,7 +149,7 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
         setTimeout(() => {
             document.getElementById('onlineButton').style.display = 'block'; // Show the image popup
             document.getElementById('imagePopup').style.display = 'block'; // Show SMS popup
-        }, 13000); // 7000 milliseconds = 7 seconds
+        }, 10000); // 7000 milliseconds = 7 seconds
     }
     e.target.value = ''; // Clear input
     return; // Exit the function
@@ -158,13 +158,13 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
         // Respond to specific messages
         if (lowerCaseMessage === 'i love you') {
             loveYouCount++; // Increment the count for "I love you"
-            if (loveYouCount === 2) {
-                botReply = 'en appa oththuka maataru, lets breakup💔';
+            if (loveYouCount === 3) {
+                botReply = 'en appa oththuka maatrada, lets breakup';
                 isBreakupActive = true; // Stop further replies
                 // Show breakup popup after 2 seconds
                 setTimeout(() => {
                     document.getElementById('breakupPopup').style.display = 'block'; // Show the breakup popup image
-                }, 10000);
+                }, 7000);
             } else {
                 botReply = 'love you too'; // Replace with your meme image URL
             }
@@ -177,10 +177,10 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
         } else if (lowerCaseMessage === 'okay') {
             botReply = 'Ok😊';
         }
-         else if (lowerCaseMessage.match(/saptiy|saptach/i)) {
-            botReply = 'Sapten,nee saptiya';
+         else if (lowerCaseMessage.match(/un appa yaaru|Un appa yaaru|Un appa yaru|un appa yaru|appa|Un appa name enna|appa ah|appa va|Appa va|Appa ah|who made you?|un appa name enna|Un appa per enna|Un appa name enna|Un appa per enna|un appa name yenna|Un appa per yenna|Un appa name yenna|Un appa name enna|appa ah|appa va|Appa va|Appa ah|who made you?|who created you?|created by?|whose your creater?|developer|developer name|Developer name|developer|developed by/i)) {
+            botReply = 'Rajesh K Rishi';
         }
-        else if (lowerCaseMessage === 'name'|| lowerCaseMessage ==='un per enna'|| lowerCaseMessage ==='per enna'|| lowerCaseMessage ==='Per enna'|| lowerCaseMessage ==='Per Enna'|| lowerCaseMessage ==='un peru enna'|| lowerCaseMessage ==='name enna'|| lowerCaseMessage ==='name'|| lowerCaseMessage ==='Name'||lowerCaseMessage ==='name?'||lowerCaseMessage ==='Name?'||lowerCaseMessage ==='un name'||lowerCaseMessage ==='what is you name'||lowerCaseMessage ==='What is you name?'||lowerCaseMessage ==='whats you Name?'||lowerCaseMessage ==='your Name?'||lowerCaseMessage ==='Your Name'||lowerCaseMessage ==='Your Name?'||lowerCaseMessage ==='ur Name'||lowerCaseMessage ==='Ur Name'||lowerCaseMessage ==='un name'||lowerCaseMessage ==='un name') {
+        else if (lowerCaseMessage === 'name'||  lowerCaseMessage ==='Un name enna'|| lowerCaseMessage ==='per enna'|| lowerCaseMessage ==='Per enna'|| lowerCaseMessage ==='Per Enna'|| lowerCaseMessage ==='un peru enna'|| lowerCaseMessage ==='name enna'|| lowerCaseMessage ==='name'|| lowerCaseMessage ==='Name'||lowerCaseMessage ==='name?'||lowerCaseMessage ==='Name?'||lowerCaseMessage ==='un name enna'||lowerCaseMessage ==='what is you name'||lowerCaseMessage ==='What is you name?'||lowerCaseMessage ==='whats you Name?'||lowerCaseMessage ==='your Name?'||lowerCaseMessage ==='Your Name'||lowerCaseMessage ==='Your Name?'||lowerCaseMessage ==='ur Name'||lowerCaseMessage ==='Ur Name'||lowerCaseMessage ==='un name'||lowerCaseMessage ==='un name') {
             botReply = 'en peru Rejinamotvani🥰';
                 }
                 else if (lowerCaseMessage === 'enna pandra'|| lowerCaseMessage ==='Enna pandra'|| lowerCaseMessage ==='enna pandra?'|| lowerCaseMessage ==='Enna pandra?'|| lowerCaseMessage ==='yenna pandra'|| lowerCaseMessage ==='Yenna pandra'|| lowerCaseMessage ==='What doing?'|| lowerCaseMessage ==='what doing?'|| lowerCaseMessage ==='enna pandringa'||lowerCaseMessage ==='Enna pandringa'||lowerCaseMessage ==='enna ma pandra'||lowerCaseMessage ==='Enna ma pandra'||lowerCaseMessage ==='enna pa pandra'||lowerCaseMessage ==='Enna pa pandra'||lowerCaseMessage ==='enna di pandra'||lowerCaseMessage ==='Enna di pandra'||lowerCaseMessage ==='enna pannitu iruka'||lowerCaseMessage ==='Enna pannitu iruka') {
@@ -188,9 +188,22 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
                 }else if (lowerCaseMessage === 'saptiya'|| lowerCaseMessage ==='Saptiya'|| lowerCaseMessage ==='Saptacha'|| lowerCaseMessage ==='saptacha'|| lowerCaseMessage ==='saptingala'|| lowerCaseMessage ==='Saptingala'|| lowerCaseMessage ==='saptiya di'|| lowerCaseMessage ==='Saptiya di'|| lowerCaseMessage ==='ne saptiya'||lowerCaseMessage ==='Nee saptiya'||lowerCaseMessage ==='Ne saptiya'||lowerCaseMessage ==='saptiya?'||lowerCaseMessage ==='Saptiya?'||lowerCaseMessage ==='saptiya pa'||lowerCaseMessage ==='Saptiya pa'||lowerCaseMessage ==='enna saptacha'||lowerCaseMessage ==='Enna saptacha'||lowerCaseMessage ==='enna saptiya'||lowerCaseMessage ==='Enna saptiya'||lowerCaseMessage ==='Saptiya ma'||lowerCaseMessage ==='saptiya ma'||lowerCaseMessage ==='') {
             botReply = 'Sapten,nee saptiya';
                 }
+                else if (lowerCaseMessage.match(/enna sapta|Enna sapta|Enna saptinga|enna saptinga|enna di sapta|Enna di sapta|Enna ma sapta|enna ma sapta|enna pa sapta|Enna pa sapta|ennanga saptinga/i)) {
+                    botReply = 'Biryani😋,ne enna sapta'; // Replace with your meme image URL
+                }
+                else if (lowerCaseMessage.match(/biryani|Biryani|biriyani|Biriyani|dosa|Dosa|idly|Idly|sapadu|Sapadu/i)) {
+                    botReply = 'Okay😊'; // Replace with your meme image URL
+                }
+                else if (lowerCaseMessage.match(/sapadala|naa sapadala|Na sapadala|illa|Illa|Naa sapadala|illa sapadala|Illa sapadala|innum sapadala|Innum sapadala|innum illa|Innum illa/i)) {
+                    botReply = 'sapadalaiya🥺,pooi sapudu🤨'; // Replace with your meme image URL
+                }
+                else if (lowerCaseMessage === 'yar fan nee'|| lowerCaseMessage ==='Yar fan nee'|| lowerCaseMessage ==='Yar fan ne'|| lowerCaseMessage ==='yar fan ne'||'yaar fan nee'|| lowerCaseMessage ==='Yaar fan nee'|| lowerCaseMessage ==='Yaar fan ne'|| lowerCaseMessage ==='yaar fan ne'|| lowerCaseMessage ==='Nee yar fan'|| lowerCaseMessage ==='nee yar fan'|| lowerCaseMessage ==='Nee yaar fan'|| lowerCaseMessage ==='nee yaar fan'|| lowerCaseMessage ==='fan'|| lowerCaseMessage ==='unaku entha hero pudikum'|| lowerCaseMessage ==='Unaku entha hero pudikum'||lowerCaseMessage ==='unaku entha hero pidikum'||lowerCaseMessage ==='Unaku entha hero pidikum'||lowerCaseMessage ==='Entha hero pudikum'||lowerCaseMessage ==='entha hero pudikum'||lowerCaseMessage ==='entha actor pudikum'||lowerCaseMessage ==='Enna actor pudikum'||lowerCaseMessage ==='Enna actor pidikum'||lowerCaseMessage ==='enna actor pidikum'||lowerCaseMessage ==='fav hero'||lowerCaseMessage ==='Fav hero'|| lowerCaseMessage=='fav actor'||  lowerCaseMessage ==='Fav hero'|| lowerCaseMessage ==='favorite hero'||  lowerCaseMessage ==='Un favorite hero'|| lowerCaseMessage ==='Favorite hero'||  lowerCaseMessage ==='un favorite hero') {
+                    botReply = '<img src="power.png" alt="Meme" style="width: 200px; border-radius: 10px;">'; // Replace with your meme image URL
+                    botReply = '<img src="power.png" alt="Meme" style="width: 200px; border-radius: 10px;">'; // Replace with your meme image URL
+                }
         else {
             // Array of random responses, including the special response
-            const randomResponses = ["seri", "oh", "okay", "appa vantaanga bye","Mmm", "appa vantaanga bye","Mmm", "appa vantaanga bye", ];
+            const randomResponses = [ "seri", "oh", "okay","Mmm", "appa vantaanga bye","Mmm", ];
             // Select a random response
             botReply = randomResponses[Math.floor(Math.random() * randomResponses.length)];
 
@@ -202,7 +215,7 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
                 setTimeout(() => {
             document.getElementById('onlineButton').style.display = 'block'; // Show the image popup
             document.getElementById('imagePopup').style.display = 'block'; // Show SMS popup
-        }, 13000);
+        }, 10000);
             }
         }
 
@@ -236,7 +249,7 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
 
             // Scroll to the bottom
             chatContainer.scrollTop = chatContainer.scrollHeight;
-        }, 5000);
+        }, 7000);
 
         // Clear the input
         e.target.value = '';
