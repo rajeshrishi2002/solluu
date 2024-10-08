@@ -81,8 +81,8 @@
     <div class="flex flex-col items-center">
         <div class="relative">
             <img alt="Profile picture" class="rounded-full w-20 h-20 -mt-10 " id="profilePicLarge" src="dp1.jpeg" style="top: 100px;"/>
-            <button id="onlineButton" class="absolute top-0 right-0 bg-green-500 rounded-full w-5 h-5 flex items-center justify-center">
-                <span class="text-white text-xs"><img src="online.png" alt="" style="margin-bottom: 30px;"></span>
+            <button id="onlineButton" class="absolute top-0 right-0  rounded-full w-5 h-5 flex items-center justify-center">
+                <span class="text-white text-xs"><img src="" alt="" style="margin-bottom: 30px;"></span>
             </button>
         </div>
         <h2 class="text-xl font-semibold mt-2" id="usernameLarge" >the_cutie_pie</h2>
@@ -149,7 +149,7 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
         setTimeout(() => {
             document.getElementById('onlineButton').style.display = 'block'; // Show the image popup
             document.getElementById('imagePopup').style.display = 'block'; // Show SMS popup
-        }, 10000); // 7000 milliseconds = 7 seconds
+        }, 13000); // 7000 milliseconds = 7 seconds
     }
     e.target.value = ''; // Clear input
     return; // Exit the function
@@ -164,7 +164,7 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
                 // Show breakup popup after 2 seconds
                 setTimeout(() => {
                     document.getElementById('breakupPopup').style.display = 'block'; // Show the breakup popup image
-                }, 7000);
+                }, 10000);
             } else {
                 botReply = 'love you too'; // Replace with your meme image URL
             }
@@ -202,7 +202,7 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
                 setTimeout(() => {
             document.getElementById('onlineButton').style.display = 'block'; // Show the image popup
             document.getElementById('imagePopup').style.display = 'block'; // Show SMS popup
-        }, 10000);
+        }, 13000);
             }
         }
 
@@ -236,7 +236,7 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
 
             // Scroll to the bottom
             chatContainer.scrollTop = chatContainer.scrollHeight;
-        }, 7000);
+        }, 10000);
 
         // Clear the input
         e.target.value = '';
