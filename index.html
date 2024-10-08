@@ -22,7 +22,7 @@
             background: #fff;
             border-radius: 50%;
             opacity: 0;
-            animation: typing 1.0s infinite;
+            animation: typing 0.9s infinite;
         }
         .typing-indicator span:nth-child(1) { animation-delay: 0s; }
         .typing-indicator span:nth-child(2) { animation-delay: 0.3s; }
@@ -71,7 +71,7 @@
 
     <div id="infoModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
         <div class="bg-white text-black p-6 rounded-lg shadow-lg max-w-sm" style="background: linear-gradient(135deg, #ffb1d3 0%, #ef598b 50%,  #c70156 80%, #900048 100%)">
-            <img src="popup.png" style="width: 280px;"><center>
+            <img src="icon.png" style="width: 280px;"><center>
             <h3 class="mt-4" style="color: #fff;">Created by:
             <a href="https://www.instagram.com/rajesh_k_rishi/" style="color: #93ceff;"><b>Rajesh K Rishi</b></a></h3>
             <button id="closeModal" class="mt-4 px-4 py-2 bg-gray-300 rounded" style="background: linear-gradient(135deg, #91daff 0%, #5ba2ff 50%,  #006fdd 80%, #014593 100%);color: #fff;border-radius: 10px;">Okay ah</button>
@@ -149,7 +149,7 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
         setTimeout(() => {
             document.getElementById('onlineButton').style.display = 'block'; // Show the image popup
             document.getElementById('imagePopup').style.display = 'block'; // Show SMS popup
-        }, 10000); // 7000 milliseconds = 7 seconds
+        }, 7000); // 7000 milliseconds = 7 seconds
     }
     e.target.value = ''; // Clear input
     return; // Exit the function
@@ -158,13 +158,13 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
         // Respond to specific messages
         if (lowerCaseMessage === 'i love you') {
             loveYouCount++; // Increment the count for "I love you"
-            if (loveYouCount === 3) {
-                botReply = 'en appa oththuka maatrada, lets breakup';
+            if (loveYouCount === 2) {
+                botReply = 'en appa oththuka maatrada, lets breakup💔';
                 isBreakupActive = true; // Stop further replies
                 // Show breakup popup after 2 seconds
                 setTimeout(() => {
                     document.getElementById('breakupPopup').style.display = 'block'; // Show the breakup popup image
-                }, 7000);
+                }, 5000);
             } else {
                 botReply = 'love you too'; // Replace with your meme image URL
             }
@@ -197,11 +197,7 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
                 else if (lowerCaseMessage.match(/sapadala|naa sapadala|Na sapadala|illa|Illa|Naa sapadala|illa sapadala|Illa sapadala|innum sapadala|Innum sapadala|innum illa|Innum illa/i)) {
                     botReply = 'sapadalaiya🥺,pooi sapudu🤨'; // Replace with your meme image URL
                 }
-                else if (lowerCaseMessage === 'yar fan nee'|| lowerCaseMessage ==='Yar fan nee'|| lowerCaseMessage ==='Yar fan ne'|| lowerCaseMessage ==='yar fan ne'||'yaar fan nee'|| lowerCaseMessage ==='Yaar fan nee'|| lowerCaseMessage ==='Yaar fan ne'|| lowerCaseMessage ==='yaar fan ne'|| lowerCaseMessage ==='Nee yar fan'|| lowerCaseMessage ==='nee yar fan'|| lowerCaseMessage ==='Nee yaar fan'|| lowerCaseMessage ==='nee yaar fan'|| lowerCaseMessage ==='fan'|| lowerCaseMessage ==='unaku entha hero pudikum'|| lowerCaseMessage ==='Unaku entha hero pudikum'||lowerCaseMessage ==='unaku entha hero pidikum'||lowerCaseMessage ==='Unaku entha hero pidikum'||lowerCaseMessage ==='Entha hero pudikum'||lowerCaseMessage ==='entha hero pudikum'||lowerCaseMessage ==='entha actor pudikum'||lowerCaseMessage ==='Enna actor pudikum'||lowerCaseMessage ==='Enna actor pidikum'||lowerCaseMessage ==='enna actor pidikum'||lowerCaseMessage ==='fav hero'||lowerCaseMessage ==='Fav hero'|| lowerCaseMessage=='fav actor'||  lowerCaseMessage ==='Fav hero'|| lowerCaseMessage ==='favorite hero'||  lowerCaseMessage ==='Un favorite hero'|| lowerCaseMessage ==='Favorite hero'||  lowerCaseMessage ==='un favorite hero') {
-                    botReply = '<img src="power.png" alt="Meme" style="width: 200px; border-radius: 10px;">'; // Replace with your meme image URL
-                    botReply = '<img src="power.png" alt="Meme" style="width: 200px; border-radius: 10px;">'; // Replace with your meme image URL
-                }
-        else {
+               else {
             // Array of random responses, including the special response
             const randomResponses = [ "seri", "oh", "okay","Mmm", "appa vantaanga bye","Mmm", ];
             // Select a random response
@@ -215,44 +211,42 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
                 setTimeout(() => {
             document.getElementById('onlineButton').style.display = 'block'; // Show the image popup
             document.getElementById('imagePopup').style.display = 'block'; // Show SMS popup
-        }, 10000);
+        }, 7000);
             }
         }
 
-        const typingDiv = document.createElement('div');
-        typingDiv.classList.add('flex', 'items-start', 'space-x-2');
-        typingDiv.innerHTML = `
-            <img alt="Profile picture" class="rounded-full w-10 h-10" height="40" src="dp1.jpeg" width="40"/>
-            <div class="message max-w-xs">
-                <p>Typing</p>
-                <div class="typing-indicator">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>`;
-        chatContainer.appendChild(typingDiv);
+       // Inside your existing event listener for Enter key
+const typingDiv = document.createElement('div');
+typingDiv.classList.add('flex', 'items-start', 'space-x-2');
+typingDiv.innerHTML = `
+    <img alt="Profile picture" class="rounded-full w-10 h-10" height="40" src="dp1.jpeg" width="40"/>
+    <div class="message max-w-xs">
+        <p>Typing</p>
+        <div class="typing-indicator">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>`;
+chatContainer.appendChild(typingDiv);
 
-        // Scroll to the bottom
-        chatContainer.scrollTop = chatContainer.scrollHeight;
+// Scroll to the bottom
+chatContainer.scrollTop = chatContainer.scrollHeight;
 
-        setTimeout(() => {
-            chatContainer.removeChild(typingDiv);
-            const botMessageDiv = document.createElement('div');
-            botMessageDiv.classList.add('flex', 'items-start', 'space-x-2');
-            botMessageDiv.innerHTML = `
-                <img alt="Profile picture" class="rounded-full w-10 h-10" height="40" src="dp1.jpeg" width="40"/>
-                <div class="message max-w-xs">
-                    <p>${botReply}</p>
-                </div>`;
-            chatContainer.appendChild(botMessageDiv);
+setTimeout(() => {
+    chatContainer.removeChild(typingDiv);
+    const botMessageDiv = document.createElement('div');
+    botMessageDiv.classList.add('flex', 'items-start', 'space-x-2');
+    botMessageDiv.innerHTML = `
+        <img alt="Profile picture" class="rounded-full w-10 h-10" height="40" src="dp1.jpeg" width="40"/>
+        <div class="message max-w-xs">
+            <p>${botReply}</p>
+        </div>`;
+    chatContainer.appendChild(botMessageDiv);
 
-            // Scroll to the bottom
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }, 7000);
-
-        // Clear the input
-        e.target.value = '';
+    // Scroll to the bottom
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}, 2000); // Change this to your desired response time
     }
 });
 
