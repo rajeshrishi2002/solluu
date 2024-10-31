@@ -15,16 +15,19 @@
             background: url('b1.jpeg');
             background-size: cover;
             transition: filter 0.3s ease; /* Smooth transition for blur effect */
+            overflow: hidden; /* Prevent scrollbars */
         }
         .floating-word {
-            position: absolute;
-            font-size: 20px;
-            color: white;
-            white-space: nowrap;
-            pointer-events: none;
-            animation: float 2s linear forwards;
-            font-family: 'Pacifico', cursive;
-        }
+    position: absolute;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.7); /* Reduced opacity */
+    white-space: nowrap;
+    pointer-events: none;
+    animation: float 2s linear forwards;
+    font-family: 'Pacifico', cursive;
+    z-index: 0; /* Ensure they are behind other elements */
+    text-shadow: #fff;
+}
         @keyframes float {
             0% { transform: translateY(0); opacity: 1; }
             100% { transform: translateY(-100vh); opacity: 0; }
@@ -42,6 +45,7 @@
             width: 190px;
             animation: floatCenter 3s ease-in-out infinite; /* Apply the floating animation */
         }
+        
         #circleBackground {
             position: fixed;
             top: 42%;
@@ -55,8 +59,67 @@
             filter: drop-shadow(0 0 30px rgba(255, 148, 193, 0.945)); /* Adjust color and spread */
             animation: floatCenter 3s ease-in-out infinite; /* Apply the floating animation */
         }
+        
+        .message-cloud {
+        position: absolute;
+        background: linear-gradient(135deg,  #ffffff 0%, #ffffff 30%,  #ffffff 80%, #ffffff 100%);
+        border-radius: 15px;
+        padding: 15px 20px;
+        color: #c9005e;
+        font-family: 'Dancing Script', cursive;
+        font-weight: bold;
+        z-index: 2;
+        transform: translate(-50%, -100%);
+        transition: opacity 0.5s;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        animation: pop-in 0.3s ease forwards; /* Keep only the pop-in animation */
+        filter: drop-shadow(0 0 10px rgba(255, 148, 193, 0.945)); /* Adjust color and spread */
 
+        
+
+    }
+
+    @keyframes pop-in {
+        from {
+            transform: translate(-50%, -120%);
+            opacity: 0;
+        }
+        to {
+            transform: translate(-50%, -100%);
+            opacity: 1;
+        }
+    }
+
+    .arrow {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -10px;
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 10px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .message-cloud::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 15px;
+        background: linear-gradient(135deg,  #ffffff 0%, #ffffff 30%,  #ffffff 80%, #ffffff 100%);
+        z-index: -1; /* Behind the message */
+        opacity: 0.5; /* Slight transparency */
+        filter: drop-shadow(0 0 30px rgba(255, 148, 193, 0.945)); /* Adjust color and spread */
+
+    }
     </style>
+
+    
 </head>
 <body class="text-white h-screen flex flex-col" id="messageInput" >
     <div id="floatingWords" class="absolute inset-0 pointer-events-none"></div>
@@ -83,66 +146,72 @@
     <div class="flex flex-col items-center p-0 rounded-lg "></div>
     <div class="flex flex-col p-4 space-y-4 overflow-y-auto flex-1 no-scrollbar" id="chatContainer" style="font-family: 'Pacifico', cursive;"></div>
     <div class="flex items-center p-2"></div>
+    <audio id="notificationSound" src="msg.mp3" preload="auto"></audio>
+
     <script>
         document.getElementById('centerGif').addEventListener('click', function() {
             window.location.href = 'home.html'; // Redirect to home.html
         });
 
         const words = [
-            "Hi", "Hello", "Saptiya", "Enna pandra", "I love you", "Cute",
-            "Poo di", "Poo da", "Number", "Okay", "Appa vantaanga bye",
+            "Hi", "Hello", "Saptiya", "Enna pandra", "love you", "Cute",
+            "Poo di", "Poo da", "Number", "Okay", "Mmmm",
             "Mmmm", "Online", "Solluu", "Love you too", "wow",
             "seri", "Miss you", "Sorry", "Thanks", "Breakup",
-            "Blocked", "🥰", "❤️", "🙈", "🫂", "💗", "🤗", "😘", "❤️", "💔", "😍", "Solluu", "Offline", "Love you too", "Solluu"
+            "Blocked", "clg", "name", "sweet", "ayyo", "poolama", "Wait", "enna sapta", "Chlm", "love", "Solluu", "Offline", "Bye", "Solluu"
         ];
         const floatingWordsContainer = document.getElementById('floatingWords');
 
-        function createFloatingWord(word) {
-            const span = document.createElement('span');
-            span.innerText = word;
-            span.className = 'floating-word';
+function createFloatingWord(word) {
+    const span = document.createElement('span');
+    span.innerText = word;
+    span.className = 'floating-word';
 
-            // Start position at the center of the screen
-            const startX = window.innerWidth / 2;
-            const startY = window.innerHeight / 2;
+    // Start position at the center of the screen
+    const startX = window.innerWidth / 2;
+    const startY = window.innerHeight / 2;
 
-            // Randomly set the angle (in radians) for direction
-            const angle = Math.random() * 2 * Math.PI;
-            const distance = Math.random() * 600 + 100; // Shortened distance for faster fill
+    // Randomly set the angle (in radians) for direction
+    const angle = Math.random() * 2 * Math.PI;
+    const distance = Math.random() * 600 + 100; // Adjusted distance
 
-            // Calculate the end position based on angle and distance
-            const endX = startX + distance * Math.cos(angle);
-            const endY = startY + distance * Math.sin(angle);
+    // Calculate the end position based on angle and distance
+    let endX = startX + distance * Math.cos(angle);
+    let endY = startY + distance * Math.sin(angle);
 
-            // Set initial styles
-            span.style.position = 'absolute';
-            span.style.left = `${startX}px`;
-            span.style.top = `${startY}px`;
-            span.style.opacity = '1';
+    // Ensure the end positions stay within the window boundaries
+    endX = Math.max(0, Math.min(endX, window.innerWidth));
+    endY = Math.max(0, Math.min(endY, window.innerHeight));
 
-            // Set the animation for movement
-            span.animate([
-                { transform: `translate(0, 0)` },
-                { transform: `translate(${endX - startX}px, ${endY - startY}px)`, opacity: 0 }
-            ], {
-                duration: 2000, // Reduced duration for faster movement
-                easing: 'linear',
-                fill: 'forwards'
-            });
+    // Set initial styles
+    span.style.left = `${startX}px`;
+    span.style.top = `${startY}px`;
+    span.style.opacity = '1';
 
-            floatingWordsContainer.appendChild(span);
+    // Append the span to the container
+    floatingWordsContainer.appendChild(span);
 
-            // Remove the word after the animation ends
-            setTimeout(() => {
-                span.remove();
-            }, 2000); // Match the animation duration
-        }
+    // Set the animation for movement
+    span.animate([
+        { transform: `translate(0, 0)` },
+        { transform: `translate(${endX - startX}px, ${endY - startY}px)`, opacity: 0 }
+    ], {
+        duration: 2000,
+        easing: 'linear',
+        fill: 'forwards'
+    });
 
-        // Create floating words at intervals
-        setInterval(() => {
-            const word = words[Math.floor(Math.random() * words.length)];
-            createFloatingWord(word);
-        }, 500); // Faster interval to generate a new word every half second
+    // Remove the word after the animation ends
+    setTimeout(() => {
+        span.remove();
+    }, 2000);
+}
+
+// Create floating words at intervals
+setInterval(() => {
+    const word = words[Math.floor(Math.random() * words.length)];
+    createFloatingWord(word);
+}, 500); // Every second
     </script>
     <script>
         document.getElementById('infoIcon').addEventListener('click', function () {
@@ -156,6 +225,57 @@
         document.getElementById('changeBgButton').addEventListener('click', function () {
             document.getElementById('bgImageInput').click(); // Trigger file input
         });
+    </script>
+    <script>
+const messages = [
+    "Hi, I'm online ♡︎",
+    "Pesalaama ♡︎",
+    "Hey ♡",
+    "I'm here for you ♡︎",
+    "Pesamaatiya ♡︎ "
+];
+
+const notificationSound = document.getElementById('notificationSound');
+
+function createMessageCloud() {
+    const messageContainer = document.createElement('div');
+    messageContainer.className = 'message-cloud';
+    messageContainer.innerText = messages[Math.floor(Math.random() * messages.length)];
+
+    // Play notification sound
+    notificationSound.currentTime = 0; // Reset sound to start
+    notificationSound.play().catch(error => {
+        console.error('Error playing sound:', error);
+    });
+
+    // Position the message cloud above the center GIF
+    const centerGif = document.getElementById('centerGif');
+    const rect = centerGif.getBoundingClientRect();
+
+    // Positioning the cloud
+    messageContainer.style.left = `${rect.left + rect.width / 2}px`;
+    messageContainer.style.top = `${rect.top}px`;
+
+    const arrow = document.createElement('div');
+    arrow.className = 'arrow';
+    
+    // Append arrow and message to the document
+    document.body.appendChild(messageContainer);
+    messageContainer.appendChild(arrow);
+
+    // Remove the message cloud after 3 seconds
+    setTimeout(() => {
+        messageContainer.style.opacity = '0';
+        setTimeout(() => {
+            messageContainer.remove();
+        }, 500); // Wait for fade-out transition
+    }, 3000); // Show message for 3 seconds
+}
+
+// Create message clouds at intervals
+setInterval(createMessageCloud, 5000); // Every 5 seconds
+
+
     </script>
 </body>
 </html>
