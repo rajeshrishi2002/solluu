@@ -1,0 +1,161 @@
+<html>
+<head>
+    <title>Solluu</title>
+    <link rel="icon" href="logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/4.0.1/wavesurfer.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background: url('b1.jpeg');
+            background-size: cover;
+            transition: filter 0.3s ease; /* Smooth transition for blur effect */
+        }
+        .floating-word {
+            position: absolute;
+            font-size: 20px;
+            color: white;
+            white-space: nowrap;
+            pointer-events: none;
+            animation: float 2s linear forwards;
+            font-family: 'Pacifico', cursive;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+        @keyframes floatCenter {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); } /* Adjust the float height */
+        }
+        #centerGif {
+            position: fixed;
+            top: 37%;
+            left: 27%;
+            transform: translate(-50%, -50%);
+            z-index: 1; /* Ensure it appears above other elements */
+            width: 190px;
+            animation: floatCenter 3s ease-in-out infinite; /* Apply the floating animation */
+        }
+        #circleBackground {
+            position: fixed;
+            top: 42%;
+            left: 30%;
+            width: 160px; /* Adjust the size of the circle */
+            height: 160px; /* Adjust the size of the circle */
+            background-color: black;
+            border-radius: 50%; /* Makes the div circular */
+            transform: translate(-50%, -50%); /* Centers the circle */
+            z-index: 0; /* Behind the GIF */
+            filter: drop-shadow(0 0 30px rgba(255, 148, 193, 0.945)); /* Adjust color and spread */
+            animation: floatCenter 3s ease-in-out infinite; /* Apply the floating animation */
+        }
+
+    </style>
+</head>
+<body class="text-white h-screen flex flex-col" id="messageInput" >
+    <div id="floatingWords" class="absolute inset-0 pointer-events-none"></div>
+    <div class="flex items-center p-0">
+        <img alt="Profile picture" id="profilePic" src="icon.png" style="margin-top: -25px; width:120px;filter: drop-shadow(0 0 5px rgba(255, 148, 193, 0.945));">
+        <div class="ml-4 flex-1"></div>
+        <div class="flex space-x-4">
+            <i id="infoIcon" class="fas fa-info-circle text-white cursor-pointer" style="font-size: 24px; margin-bottom: 30px; margin-right: 10px;filter: drop-shadow(0 0 5px rgba(255, 148, 193, 0.945));"></i>
+        </div>
+    </div>
+    <div id="circleBackground"></div>
+    <img id="centerGif" src="dp.gif" alt="Center GIF" />
+    <div id="infoModal" class="fixed inset-0 flex items-center justify-center hidden" style="z-index: 10;">
+        <div class="bg-white text-black p-6 rounded-lg shadow-lg max-w-sm" style="background: linear-gradient(135deg, #ffb1d3 0%, #e01279 30%, #82003a 80%, #e01279 100%)">
+            <img src="popup.png" style="width: 280px; display: block; margin: 0 auto;filter: drop-shadow(0 0 5px rgba(255, 148, 193, 0.945));">
+            <h3 class="mt-2 text-center" style="color: #fff; margin-bottom: 10px;">Created by:
+                <a href="https://www.instagram.com/rajesh_k_rishi/" style="color: #ff87c3;"><b>Rajesh K Rishi</b></a>
+            </h3>
+            <h3 class="mt-2 text-center" style="color: #fff; margin-bottom: 10px;">The app is still under development!</h3>
+            <input type="file" id="bgImageInput" accept="image/*" class="mt-4" style="display: none;" />
+            <button id="closeModal" class="mt-2 px-5 py-2 bg-gray-300 rounded" style="background: linear-gradient(135deg, #ffffff 0%, #ffbad7 30%,  #f13191 80%); color: #fff; border-radius: 10px; margin-left: 110px;filter: drop-shadow(0 0 10px rgba(148, 1, 62, 0.945));">OK</button>
+        </div>
+    </div>
+    <div class="flex flex-col items-center p-0 rounded-lg "></div>
+    <div class="flex flex-col p-4 space-y-4 overflow-y-auto flex-1 no-scrollbar" id="chatContainer" style="font-family: 'Pacifico', cursive;"></div>
+    <div class="flex items-center p-2"></div>
+    <script>
+        document.getElementById('centerGif').addEventListener('click', function() {
+            window.location.href = 'home.html'; // Redirect to home.html
+        });
+
+        const words = [
+            "Hi", "Hello", "Saptiya", "Enna pandra", "I love you", "Cute",
+            "Poo di", "Poo da", "Number", "Okay", "Appa vantaanga bye",
+            "Mmmm", "Online", "Solluu", "Love you too", "wow",
+            "seri", "Miss you", "Sorry", "Thanks", "Breakup",
+            "Blocked", "🥰", "❤️", "🙈", "🫂", "💗", "🤗", "😘", "❤️", "💔", "😍", "Solluu", "Offline", "Love you too", "Solluu"
+        ];
+        const floatingWordsContainer = document.getElementById('floatingWords');
+
+        function createFloatingWord(word) {
+            const span = document.createElement('span');
+            span.innerText = word;
+            span.className = 'floating-word';
+
+            // Start position at the center of the screen
+            const startX = window.innerWidth / 2;
+            const startY = window.innerHeight / 2;
+
+            // Randomly set the angle (in radians) for direction
+            const angle = Math.random() * 2 * Math.PI;
+            const distance = Math.random() * 600 + 100; // Shortened distance for faster fill
+
+            // Calculate the end position based on angle and distance
+            const endX = startX + distance * Math.cos(angle);
+            const endY = startY + distance * Math.sin(angle);
+
+            // Set initial styles
+            span.style.position = 'absolute';
+            span.style.left = `${startX}px`;
+            span.style.top = `${startY}px`;
+            span.style.opacity = '1';
+
+            // Set the animation for movement
+            span.animate([
+                { transform: `translate(0, 0)` },
+                { transform: `translate(${endX - startX}px, ${endY - startY}px)`, opacity: 0 }
+            ], {
+                duration: 2000, // Reduced duration for faster movement
+                easing: 'linear',
+                fill: 'forwards'
+            });
+
+            floatingWordsContainer.appendChild(span);
+
+            // Remove the word after the animation ends
+            setTimeout(() => {
+                span.remove();
+            }, 2000); // Match the animation duration
+        }
+
+        // Create floating words at intervals
+        setInterval(() => {
+            const word = words[Math.floor(Math.random() * words.length)];
+            createFloatingWord(word);
+        }, 500); // Faster interval to generate a new word every half second
+    </script>
+    <script>
+        document.getElementById('infoIcon').addEventListener('click', function () {
+            document.getElementById('infoModal').classList.remove('hidden'); // Show modal
+        });
+
+        document.getElementById('closeModal').addEventListener('click', function () {
+            document.getElementById('infoModal').classList.add('hidden'); // Hide modal
+        });
+
+        document.getElementById('changeBgButton').addEventListener('click', function () {
+            document.getElementById('bgImageInput').click(); // Trigger file input
+        });
+    </script>
+</body>
+</html>
