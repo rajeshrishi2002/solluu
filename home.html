@@ -63,7 +63,8 @@
             transform: translate(-50%, -50%);
             width: 300px;
             border-radius: 10px;  
-            filter: drop-shadow(0 0 15px rgba(255, 148, 193, 0.945));     
+            filter: drop-shadow(0 0 15px rgba(255, 148, 193, 0.945)); 
+            z-index: 1000; /* Make sure it appears above other elements */
         }
         .popup img {
             width: 600px;
@@ -154,6 +155,7 @@
 }
 
 
+
 </style>
    <script>
         const messageInput = document.getElementById('messageInput');
@@ -177,7 +179,7 @@
             <i id="infoIcon" class="fas fa-info-circle text-white cursor-pointer" style="font-size: 24px; margin-bottom: 30px; margin-right: 10px;filter: drop-shadow(0 0 5px rgba(255, 148, 193, 0.945));"></i>
         </div>
     </div>
-    <div id="infoModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div id="infoModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden ">
         <div class="bg-white text-black p-6 rounded-lg shadow-lg max-w-sm" style="background: linear-gradient(135deg, #ffb1d3 0%, #e01279 30%, #82003a 80%, #e01279 100%)">
             <img src="popup.png" style="width: 280px; display: block; margin: 0 auto;filter: drop-shadow(0 0 5px rgba(255, 148, 193, 0.945));">
             <h3 class="mt-2 text-center" style="color: #fff; margin-bottom: 10px;">Created by:
@@ -223,6 +225,11 @@
             <source id="audioSource" src="winner.ogg" type="audio/mpeg">
         </audio>
     </div>
+    <audio id="loveYouAudio" src="loveyoutoo.mp3" preload="auto"></audio>
+    <audio id="byeAudio" src="appavantaangabye.mp3" preload="auto"></audio>
+    <audio id="badWordAlert" src="badwords.mp3" preload="auto"></audio>
+
+
 <script>
  document.addEventListener('DOMContentLoaded', () => {
             const messageInput = document.getElementById('messageInput');
@@ -281,10 +288,10 @@
             const typingDiv = document.createElement('div');
 typingDiv.classList.add('flex', 'items-start', 'space-x-2');
 typingDiv.innerHTML = `
-    <img alt="Profile picture" class="rounded-full w-10 h-10" height="40" src="dp2.jpeg" width="40" style="filter: drop-shadow(0 0 5px rgba(255, 148, 193, 0.945));">
+    <img alt="Profile picture" class="rounded-full w-10 h-10" height="40" src="dp2.jpeg" width="40"/>
     <div class="message max-w-xs">
         <p>Typing</p>
-        <div class="typing-indicator">
+        <div class="typing-indicator" style="margin-top:5px;">
             <span></span>
             <span></span>
             <span></span>
@@ -298,7 +305,7 @@ setTimeout(() => {
     const botMessageDiv = document.createElement('div');
     botMessageDiv.classList.add('flex', 'items-start', 'space-x-2');
     botMessageDiv.innerHTML = `
-    <img alt="Profile picture" class="rounded-full w-10 h-10" height="40" src="dp2.jpeg" width="40"style="filter: drop-shadow(0 0 5px rgba(255, 148, 193, 0.945));">
+    <img alt="Profile picture" class="rounded-full w-10 h-10" height="40" src="dp2.jpeg" width="40"/>
     <div class="message max-w-xs" style="font-family: 'Pacifico', cursive;">
         <p>Nice🥰</p>
     </div>`;
@@ -380,12 +387,26 @@ setTimeout(() => {
     let loveYouCount = 0; // Counter for "I love you" messages
 let isBreakupActive = false; // Flag to control bot replies
 let hasSaidGoodbye = false; // Flag to track if "appa vantaanga bye" has been sent
+const badWords = ["sex", "fuck", "ass", "asshole", "punda", "sunni","Thevidiya", "dhevidiya", "*", "otha", "Ootha", "*tha","mairu", "hair", "kunji", "koothi", "kuthi", "koodhi","kudhi", "oluka", "pundaiya", "kanji", "oothu", "uthu","sala", "saala", "vai", "potta", "pochi", "pochchi","mava", "mavale", "siluku", "silk", "olukka","umburiya","umbu","oombu","kundi","poodu","podu"];
 
 document.getElementById('messageInput').addEventListener('keypress', function (e) {
 
     if (e.key === 'Enter') {
         const message = e.target.value.trim();
         const chatContainer = document.getElementById('chatContainer');
+        const badWordAlert = document.getElementById('badWordAlert');
+
+        // Check for bad words
+        const containsBadWord = badWords.some(badWord => message.includes(badWord));
+        if (containsBadWord) {
+            badWordAlert.play(); // Play the audio alert immediately
+            setTimeout(() => {
+                alert("Don't use bad words");
+            }, 0); // Show alert without delay
+            e.target.value = ''; // Clear the input
+            return; // Exit the function
+        }
+
         
         if (message.includes('voice')) {
     e.target.value = '';
@@ -394,8 +415,8 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
         audioPlayerDiv.classList.add('flex', 'items-start', 'space-x-2', 'p-0', 'rounded-lg', 'shadow-lg');
 
         audioPlayerDiv.innerHTML = `
-            <img alt="Profile picture" class="rounded-full w-10 h-10" src="dp2.jpeg" style="filter: drop-shadow(0 0 5px rgba(255, 148, 193, 0.945));">
-            <div class="message max-w-xs flex-1">
+        <img alt="Profile picture" class="rounded-full w-10 h-10" height="40" src="dp2.jpeg" width="40"/>
+             <div class="message max-w-xs flex-1">
                 <div class="flex items-center justify-between">
                     <audio id="audioPlayer" class="hidden">
                         <source src="voice.mp3" type="audio/mpeg">
@@ -464,35 +485,72 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
         if (hasSaidGoodbye) {
     messageCountAfterGoodbye++;
     if (messageCountAfterGoodbye === 3) {
+        document.getElementById('byeAudio').play(); // Play the audio
         setTimeout(() => {
+           
             document.getElementById('onlineButton').style.display = 'block'; // Show the image popup
             document.getElementById('imagePopup').style.display = 'block'; // Show SMS popup
-        }, 7000); // 7000 milliseconds = 7 seconds
+        }, 8000);
     }
     e.target.value = ''; // Clear input
     return; // Exit the function
 }
-        if (lowerCaseMessage.match(/i love you/i)) {
-            loveYouCount++; // Increment the count for "I love you"
-            if (loveYouCount === 2) {
-                botReply = 'en appa oththuka maatrada, lets breakup💔';
-                isBreakupActive = true; // Stop further replies
-                setTimeout(() => {
-                    document.getElementById('breakupPopup').style.display = 'block'; // Show the breakup popup image
-                }, 5000);
-            } else {
-                botReply = 'love you too😘'; // Replace with your meme image URL
-            }
-        }else if (lowerCaseMessage.match(/hi/i)) {
-            botReply = 'Hello🙋🏻‍♀️';
-        }else if (lowerCaseMessage.match(/photo/i)) {
+if (lowerCaseMessage.match(/love you/i)) {
+    loveYouCount++; // Increment the count for "I love you"
+    if (loveYouCount === 2) {
+        botReply = 'en appa oththuka maatrada, lets breakup💔';
+        isBreakupActive = true; // Stop further replies
+        setTimeout(() => {
+            document.getElementById('onlineButton').style.display = 'none'; // Hide the online button
+            document.getElementById('breakupPopup').style.display = 'block'; // Show the breakup popup image
+        }, 5000);
+    } else {
+        botReply = 'love you too🙈😘';
+
+        // Delay audio playback by 2 seconds
+        setTimeout(() => {
+            const loveYouAudio = document.getElementById('loveYouAudio');
+            loveYouAudio.play();
+            
+            // Show color blast animation
+            const colorBlast = document.getElementById('colorBlast');
+            colorBlast.style.display = 'block';
+
+            // Remove animation after it finishes
+            setTimeout(() => {
+                colorBlast.style.display = 'none';
+            }, 1000); // Match this to the animation duration
+        }, 2000); // 2000 milliseconds = 2 seconds
+    }
+}
+else if (lowerCaseMessage.match(/hi/i)) {
+            const responses = [
+                        'hii🥰',
+                         'hi🙋🏻‍♀️',
+                         'Hii😊'
+                         ];
+                 botReply = responses[Math.floor(Math.random() * responses.length)];
+                }
+                else if (lowerCaseMessage.match(/oi/i)) {
+            const responses = [
+                        'enna oii🤨',
+                         'oo Hoi😅'
+                         ];
+                 botReply = responses[Math.floor(Math.random() * responses.length)];
+                }
+                else if (lowerCaseMessage.match(/photo/i)) {
             botReply = `
                <img src="photo.png" alt="Here’s your photo!" style="width: 100%; border-radius: 15px;">
                  <p>Eppidi iruken🥰</p>
             `;
         }else if (lowerCaseMessage.match(/hey/i)) {
-            botReply = 'Hello🙋🏻‍♀️';
-        }else if (lowerCaseMessage.match(/busy/i)) {
+            const responses = [
+                        'hii🥰',
+                         'hi🙋🏻‍♀️',
+                         'Hii😊'
+                         ];
+                 botReply = responses[Math.floor(Math.random() * responses.length)];
+                }else if (lowerCaseMessage.match(/busy/i)) {
             botReply = 'illa da,sollu';
         }else if (lowerCaseMessage.match(/number/i)) {
             botReply = '9004470167';
@@ -506,15 +564,85 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
             botReply = 'Rajesh K Rishi';
         }else if (lowerCaseMessage.match(/nice|wow|awww|semma|azhaga iruka|romba azhaga iruka|beautiful|pretty|uyire|haiyo|kolriye|paah|pah|cute|cutie pie|cutey|angel|devatha|azhagi/i)) {
             botReply = '🙈tq';
-        }else if (lowerCaseMessage.match(/name/i)) {            
-            botReply = 'en peru Rejinamotvani🥰';
-                }else if (lowerCaseMessage.match(/per/i)) {            
-            botReply = 'en peru Rejinamotvani🥰';
-                }else if (lowerCaseMessage.match(/pandra/i)) { 
-                botReply = 'unta thaan chat pandren😅';
-                }else if (lowerCaseMessage.match(/panra/i)) { 
-                botReply = 'unta thaan chat pandren😅';
-                }else if (lowerCaseMessage.match(/ooru/i)) { 
+        }else if (lowerCaseMessage.match(/name/i)) {
+            botReply = 'Haha Hasini🥰';
+           setTimeout(() => {
+           const audio = new Audio('hasini.mp3'); 
+           audio.play();
+            }, 2000);
+        }else if (lowerCaseMessage.match(/per/i)) {            
+         botReply = 'Haha Hasini🥰';
+           setTimeout(() => {
+        const audio = new Audio('hasini.mp3'); 
+        audio.play();
+         }, 2000);
+        }else if (lowerCaseMessage.match(/pandra/i)) { 
+                    const responses = [
+                        'unta thaan chat pandren😅',
+                         'summa thaan iruken🙃'
+                         ];
+                 botReply = responses[Math.floor(Math.random() * responses.length)];
+                }
+                    else if (lowerCaseMessage.match(/panra/i)) { 
+                        const responses = [
+                        'unta thaan chat pandren😅',
+                         'summa thaan iruken🙃'
+                         ];
+                 botReply = responses[Math.floor(Math.random() * responses.length)];
+                }
+                else if (lowerCaseMessage.match(/nice name/i)) { 
+                botReply = 'Thanks🥰';
+                }
+
+                else if (lowerCaseMessage.match(/nalla iruku/i)) { 
+                botReply = 'Thanks🥰';
+                }
+                else if (lowerCaseMessage.match(/sapten/i)) { 
+                botReply = 'okay,god boy😊';
+                }
+                else if (lowerCaseMessage.match(/enga poolam|enga poogalaam|poogalaam|engaiyathu poolaama|pogalama/i)) { 
+                botReply = 'movie🤔';
+                }
+                else if (lowerCaseMessage.match(/entha movie|movie ah|yaar movie|movie poolama| movie pogalama|movie poogalaama/i)) { 
+                botReply = 'un istam🥰';
+                }
+                else if (lowerCaseMessage.match(/enga iruka|engadi iruka|enga di iruka|where|engatha iruka|ippo enga iruka|veetulaiya iruka|veetlaiya iruka/i)) { 
+                   const responses = [
+                   'veetula thaan',
+                  'veliya iruken, apparam pesuren,kochikatha bye👋🏻' // Keep the original response
+                 ];
+                 botReply = responses[Math.floor(Math.random() * responses.length)];
+                botReply = botReply.replace(/, /g, '<br>');
+                }
+                else if (lowerCaseMessage.match(/address|adress/i)) { 
+                    botReply = 'Osama Bin Laden, Indugus malai, kapil nagar, Afghanistan, care of  Mullah Omar';
+                    botReply = botReply.replace(/, /g, '<br>');
+           setTimeout(() => {
+        const audio = new Audio('address.mp3'); 
+        audio.play();
+         }, 2000);
+        }
+        else if (lowerCaseMessage.match(/nakku/i)) { 
+                    botReply = 'seththa payale🤬';
+           setTimeout(() => {
+        const audio = new Audio('nakku.mp3'); 
+        audio.play();
+         }, 2000);
+        }
+        else if (lowerCaseMessage.match(/kastam|kastama|senthurava|sethuruven|sethuten|seththurava|seththuten|sethuru|sethura|seththura|sethth|seth|saaga|saga/i)) { 
+            const responses = [
+                        'Saavu😠',
+                         'Saavu da😤',
+                         'Saavula Seththapayala🤬'
+                         ];
+                         
+                 botReply = responses[Math.floor(Math.random() * responses.length)];
+                   setTimeout(() => {
+        const audio = new Audio('saavu.mp3'); 
+        audio.play();
+         }, 2000);
+        }
+                else if (lowerCaseMessage.match(/ooru/i)) { 
                 botReply = 'Trichy❤️';
                 }else if (lowerCaseMessage.match(/area/i)) { 
                 botReply = 'Trichy thaan ';
@@ -553,8 +681,12 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
                 }else if (lowerCaseMessage.match(/hero/i)) {
                  botReply = 'Thalapathy❤️';
                 }else if (lowerCaseMessage.match(/enna sapta|Enna sapta|Enna saptinga|enna saptinga|enna di sapta|Enna di sapta|Enna ma sapta|enna ma sapta|enna pa sapta|Enna pa sapta|ennanga saptinga/i)) {
-                    botReply = 'Biryani😋'; // Replace with your meme image URL
-                } else if (lowerCaseMessage.match(/biryani|Biryani|biriyani|Biriyani|dosa|Dosa|idly|Idly|sapadu|Sapadu/i)) {
+                    const responses = [
+                        'Biryani😋',
+                         'Dosa thaan'
+                         ];
+                 botReply = responses[Math.floor(Math.random() * responses.length)];
+                }else if (lowerCaseMessage.match(/biryani|Biryani|biriyani|Biriyani|dosa|Dosa|idly|Idly|sapadu|Sapadu/i)) {
                     botReply = 'Okay😊'; // Replace with your meme image URL
                 } else if (lowerCaseMessage.match(/sapadala|sapadanum|naa sapadala|Na sapadala|sapdala|illa|Illa|Naa sapadala|illa sapadala|Illa sapadala|innum sapadala|Innum sapadala|innum illa|Innum illa/i)) {
                     botReply = 'sapadalaiya🥺,pooi sapudu🤨'; // Replace with your meme image URL
@@ -562,21 +694,22 @@ document.getElementById('messageInput').addEventListener('keypress', function (e
             const randomResponses = [ "seri", "ok", "okay","Mmm", "appa vantaanga bye","Mmm", ];
             botReply = randomResponses[Math.floor(Math.random() * randomResponses.length)];
             if (botReply === "appa vantaanga bye") {
+                document.getElementById('byeAudio').play(); // Play the audio
                 hasSaidGoodbye = true; // Set the flag to true
                 document.getElementById('onlineButton').style.display = 'none'; // Hide the online button
                 setTimeout(() => {
             document.getElementById('onlineButton').style.display = 'none'; // Show the image popup
             document.getElementById('imagePopup').style.display = 'block'; // Show SMS popup
-        }, 7000);
+        }, 8000);
             }
         }
 const typingDiv = document.createElement('div');
 typingDiv.classList.add('flex', 'items-start', 'space-x-2');
 typingDiv.innerHTML = `
-    <img alt="Profile picture" class="rounded-full w-10 h-10" height="40" src="dp2.jpeg" width="40"style="filter: drop-shadow(0 0 5px rgba(255, 148, 193, 0.945));">
+    <img alt="Profile picture" class="rounded-full w-10 h-10" height="40" src="dp2.jpeg" width="40"style="filter: drop-shadow(0 0 5px rgba(255, 148, 193, 0.945)); ">
     <div class="message max-w-xs">
         <p>Typing</p>
-        <div class="typing-indicator">
+        <div class="typing-indicator"  style="margin-top:5px;">
             <span></span>
             <span></span>
             <span></span>
@@ -590,7 +723,7 @@ setTimeout(() => {
     const botMessageDiv = document.createElement('div');
     botMessageDiv.classList.add('flex', 'items-start', 'space-x-2');
     botMessageDiv.innerHTML = `
-    <img alt="Profile picture" class="rounded-full w-10 h-10" height="40" src="dp2.jpeg" width="40" style="filter: drop-shadow(0 0 5px rgba(255, 148, 193, 0.945));">
+    <img alt="Profile picture" class="rounded-full w-10 h-10" height="40" src="dp2.jpeg" width="40"/>
     <div class="message max-w-xs" style="font-family: 'Pacifico', cursive;filter: drop-shadow(0 0 5px rgba (192, 0, 80, 0.945));">
         <p>${botReply}</p>
     </div>`;
